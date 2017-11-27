@@ -1,4 +1,5 @@
-var http = require('http');
+const http = require('http');
+const url = require('url');
 
 const PORT = process.argv[2];
 const MAX_NUMBER = process.argv[3];
@@ -13,7 +14,13 @@ const getNewRandom = function(){
 getNewRandom();
 
 http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain',
+	var reqUrl = url.parse(req.url, true);
+	if (req.method == 'GET' && reqUrl.path == "/api/random") {
+		res.writeHead(200, {'Content-Type': 'text/plain',
 						'Access-Control-Allow-Origin': '*'});
-    res.end(JSON.stringify(data));
+		res.end(JSON.stringify(data));
+		return
+	}
+	res.writeHead(404,{'Content-Type': 'text/plain'});
+	res.end('Not found');
 }).listen(PORT);
