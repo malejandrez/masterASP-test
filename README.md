@@ -9,8 +9,6 @@ Some general considerations:
 
 Quick guide:
 
-To run the backend:
-
 - Execute the following command in the backend folder node index.js 3001 100 60 (note that this changes the port to 3001)
 - Change the SERVICE_URL variable to http://localhost:3001 in <project_folder>\masterASP\frontend\src\App.js
 - Run 'npm start' in the frontend folder
